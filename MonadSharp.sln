@@ -3,6 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonadSharp", "MonadSharp\MonadSharp.csproj", "{6F6701EA-CAE5-40EB-982E-78400783EFB0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E47EEBAF-9A8C-4062-B02F-B1F2EF408E6E}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonadSharp.NuGetPackage", "MonadSharp.NuGetPackage\MonadSharp.NuGetPackage.csproj", "{01D42EB5-8129-4E73-8FB8-271C9F2C55BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +22,10 @@ Global
 		{6F6701EA-CAE5-40EB-982E-78400783EFB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F6701EA-CAE5-40EB-982E-78400783EFB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F6701EA-CAE5-40EB-982E-78400783EFB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01D42EB5-8129-4E73-8FB8-271C9F2C55BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01D42EB5-8129-4E73-8FB8-271C9F2C55BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01D42EB5-8129-4E73-8FB8-271C9F2C55BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01D42EB5-8129-4E73-8FB8-271C9F2C55BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

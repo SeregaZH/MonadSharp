@@ -5,3 +5,5 @@ Bin/
 packages/
 *.suo
 *.bak
+MonadSharp.NuGetPackage/
+*.exe
