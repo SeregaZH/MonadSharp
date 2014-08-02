@@ -7,3 +7,4 @@ packages/
 *.bak
 MonadSharp.NuGetPackage/
 *.exe
+*.user

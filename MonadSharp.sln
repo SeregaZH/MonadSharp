@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E47EEB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonadSharp.NuGetPackage", "MonadSharp.NuGetPackage\MonadSharp.NuGetPackage.csproj", "{01D42EB5-8129-4E73-8FB8-271C9F2C55BE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonadSharp.Tests", "MonadSharp.Tests\MonadSharp.Tests.csproj", "{8BCB888E-CB7A-4D47-A2B1-E7A400CD012C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{01D42EB5-8129-4E73-8FB8-271C9F2C55BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01D42EB5-8129-4E73-8FB8-271C9F2C55BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01D42EB5-8129-4E73-8FB8-271C9F2C55BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BCB888E-CB7A-4D47-A2B1-E7A400CD012C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BCB888E-CB7A-4D47-A2B1-E7A400CD012C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BCB888E-CB7A-4D47-A2B1-E7A400CD012C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BCB888E-CB7A-4D47-A2B1-E7A400CD012C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
