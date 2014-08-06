@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace MonadSharp
+namespace MonadSharp.Maybe
 {
   /// <summary>
   /// Maybe monad implementation
   /// Implementation for class. Nothing value is null
   /// </summary>
-  public static class Maybe
+  public static class MaybeExtensions
   {
     /// <summary>
     /// Evaluate function if input is not null
@@ -97,6 +97,90 @@ namespace MonadSharp
       where TOutput : struct
     {
       return oInput.HasValue ? evaluator(oInput) : failValue;
+    }
+
+    /// <summary>
+    /// Inline check if object is null
+    /// </summary>
+    /// <param name="oInput">Value for check</param>
+    /// <typeparam name="TInput">Generic type (class constraint)</typeparam>
+    /// <returns>False if object is null, true if object is false</returns>
+    public static bool IsNotNull<TInput>(this TInput oInput)
+      where TInput : class
+    {
+      return oInput != null;
+    }
+
+    /// <summary>
+    /// Allow to check some conditions in the chain
+    /// </summary>
+    /// <param name="oInput">Object to check</param>
+    /// <param name="predicate">Check function</param>
+    /// <typeparam name="TInput">Generic type (class constraint)</typeparam>
+    /// <returns>Input value if value not null and predicate is truly</returns>
+    public static TInput If<TInput>(this TInput oInput, Predicate<TInput> predicate)
+      where TInput : class
+    {
+      return oInput != null && predicate(oInput) ? oInput : null ;
+    }
+
+    /// <summary>
+    /// Allow to check some conditions in the chain
+    /// Implementation for nullable types
+    /// </summary>
+    /// <param name="oInput">Object to check</param>
+    /// <param name="predicate">Check function</param>
+    /// <typeparam name="TInput">Generic type (class constraint)</typeparam>
+    /// <returns>Input value if value not null and predicate is truly</returns>
+    public static TInput? If<TInput>(this TInput? oInput, Predicate<TInput?> predicate)
+      where TInput : struct
+    {
+      return oInput.HasValue && predicate(oInput) ? oInput : null;
+    }
+
+    /// <summary>
+    /// Select Many implementation
+    /// </summary>
+    /// <param name="input">caller source object</param>
+    /// <param name="selector">factory function for selector</param>
+    /// <param name="resultSelector">factory function for result</param>
+    /// <typeparam name="TSource">Generic type (class constraint)</typeparam>
+    /// <typeparam name="TResult">Generic type (class constraint)</typeparam>
+    /// <typeparam name="TSelect">Generic type (class constraint)</typeparam>
+    /// <returns></returns>
+    public static TResult SelectMany<TSource, TSelect, TResult>(this TSource input, Func<TSource, TSelect> selector, Func<TSource, TSelect,TResult> resultSelector)
+      where TResult : class 
+      where TSource : class
+      where TSelect : class 
+    {
+      var selected = selector(input);
+      if (input == null || selected == null)
+        return null;
+      return resultSelector(input, selected);
+    }
+
+    /// <summary>
+    /// Select Many implementation for nullable types
+    /// </summary>
+    /// <param name="input">caller source object</param>
+    /// <param name="selector">factory function for selector</param>
+    /// <param name="resultSelector">factory function for result</param>
+    /// <typeparam name="TSource">Generic type (stuct constraint)</typeparam>
+    /// <typeparam name="TResult">Generic type (stuct constraint)</typeparam>
+    /// <typeparam name="TSelect">Generic type (stuct constraint)</typeparam>
+    /// <returns></returns>
+    public static TResult? SelectMany<TSource, TSelect, TResult>(this TSource? input, Func<TSource?, TSelect?> selector, Func<TSource?, TSelect?, TResult?> resultSelector)
+      where TResult : struct 
+      where TSource : struct 
+      where TSelect : struct 
+    {
+      var selected = selector(input);
+      if (input.HasValue && selected.HasValue)
+      {
+        return resultSelector(input, selected);
+      }
+
+      return null;
     }
   }
 }

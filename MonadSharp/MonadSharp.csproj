@@ -47,9 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Maybe.cs" />
+    <Compile Include="Continuation\ContinuationExtension.cs" />
+    <Compile Include="Maybe\MaybeExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TypeMonads.cs" />
+    <Compile Include="TypeMonadExtensions.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

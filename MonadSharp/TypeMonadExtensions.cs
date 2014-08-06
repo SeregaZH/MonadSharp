@@ -1,9 +1,9 @@
 ﻿namespace MonadSharp
 {
   /// <summary>
-  /// Inline methods for work with C# btype system
+  /// Inline methods for work with C# type system
   /// </summary>
-  public static class TypeMonads
+  public static class TypeMonadExtensions
   {
     /// <summary>
     /// cast input value to specific type
