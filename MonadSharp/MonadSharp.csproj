@@ -48,7 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Continuation\ContinuationExtension.cs" />
+    <Compile Include="Maybe\IMaybeMonoid.cs" />
     <Compile Include="Maybe\MaybeExtensions.cs" />
+    <Compile Include="Maybe\MaybeMonoid.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TypeMonadExtensions.cs" />
   </ItemGroup>

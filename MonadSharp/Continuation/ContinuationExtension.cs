@@ -8,60 +8,35 @@ namespace MonadSharp.Continuation
   public static class ContinuationExtension
   {
     /// <summary>
-    /// Add second action to the continuation for the first action
+    /// Unit function for continuation monad
     /// </summary>
-    /// <param name="baseAction">First action</param>
-    /// <param name="nextAction">Continuation action</param>
-    /// <typeparam name="TInput">Input type</typeparam>
-    /// <returns>Action that represent base action with nextAction as continuation</returns>
-    public static Action<TInput> ContinueWith<TInput>(this Action<TInput> baseAction, Action<TInput> nextAction)
+    /// <param name="input">value to convert</param>
+    /// <typeparam name="TInput">input type</typeparam>
+    /// <typeparam name="TResult">result type</typeparam>
+    /// <returns>value converted to continuation. Func(TInput, TResult) - monoid</returns>
+    public static Func<Func<TInput, TResult>, TResult> ToContinuation<TInput, TResult>(this TInput input)
     {
-      return input =>
-        {
-          baseAction.Invoke(input);
-          nextAction.Invoke(input);
-        };
+      return func => func(input);
     }
 
     /// <summary>
-    /// Continuation monad for function
+    /// Select many implementation for continuation monad
     /// </summary>
-    /// <param name="baseFunction">Base function</param>
-    /// <param name="continueFunction">Function for continuation</param>
-    /// <typeparam name="TInput">Input type for base function</typeparam>
-    /// <typeparam name="TContinue">Return type for base function</typeparam>
-    /// <typeparam name="TResult">Continuation function result</typeparam>
-    /// <returns>Function for represent chain of functions</returns>
-    public static Func<TInput, TResult> ContinueWith<TInput, TContinue, TResult>(
-      this Func<TInput, TContinue> baseFunction, Func<TContinue, TResult> continueFunction)
+    /// <param name="input">first continuation monoid</param>
+    /// <param name="value">second continuation monoid depend on input</param>
+    /// <param name="selector">selector</param>
+    /// <typeparam name="TInput">first monoid type</typeparam>
+    /// <typeparam name="TValue">second monoid type</typeparam>
+    /// <typeparam name="TSelect">selector return type</typeparam>
+    /// <typeparam name="TResult">result type</typeparam>
+    /// <returns>resulted continuation monoid</returns>
+    public static Func<Func<TSelect, TResult>, TResult> SelectMany<TInput, TValue, TSelect, TResult>(
+             this Func<Func<TInput, TResult>, TResult> input,
+                  Func<TInput, Func<Func<TValue, TResult>, TResult>> value,
+                  Func<TInput, TValue, TSelect> selector)
     {
-      return input =>
-        {
-          var result = baseFunction(input);
-          return continueFunction(result);
-        };
+      return map => input(a => value(a)(x => map(selector(a, x))));
     }
 
-    /// <summary>
-    /// Select maybe implementation for continuation monad
-    /// </summary>
-    /// <param name="baseFunction">Base function</param>
-    /// <param name="continueFunction">Continuatoin function</param>
-    /// <param name="resultSelector">Function for creating computation result</param>
-    /// <typeparam name="TInput">Input arguments type</typeparam>
-    /// <typeparam name="TContinue">Continuation return type</typeparam>
-    /// <typeparam name="TResult">Result type</typeparam>
-    /// <returns></returns>
-    public static Func<TInput, TResult> SelectMany<TInput, TContinue, TResult>(
-      this Func<TInput, TContinue> baseFunction, Func<TInput, Func<TInput,TContinue>> continueFunction,
-      Func<TContinue, TContinue, TResult> resultSelector)
-    {
-      return input =>
-        {
-          var baseResult = baseFunction(input);
-          var continuation = continueFunction(input)(input);
-          return resultSelector(baseResult, continuation);
-        };
-    }
   }
 }

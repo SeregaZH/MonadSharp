@@ -2,6 +2,7 @@
 obj/
 bin/
 Bin/
+TestResults/
 packages/
 *.suo
 *.bak
