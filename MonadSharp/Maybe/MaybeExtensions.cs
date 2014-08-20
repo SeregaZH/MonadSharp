@@ -72,6 +72,20 @@ namespace MonadSharp.Maybe
     }
 
     /// <summary>
+    /// Inline as operator implementation 
+    /// </summary>
+    /// <param name="oInput">monoid to conversion</param>
+    /// <typeparam name="TInput">type for convert (class constraint)</typeparam>
+    /// <typeparam name="TOutput">type to convert (class constraint)</typeparam>
+    /// <returns>monoid with changed type</returns>
+    public static IMaybeMonoid<TOutput> As<TInput, TOutput>(this IMaybeMonoid<TInput> oInput)
+      where TInput : class 
+      where TOutput: class
+    {
+      return oInput.HasValue ? new MaybeMonoid<TOutput>(oInput.Value as TOutput) : MaybeMonoid<TOutput>.Nothing();
+    }
+
+    /// <summary>
     /// Select Many implementation
     /// </summary>
     /// <param name="oInput">caller source monoid</param>
